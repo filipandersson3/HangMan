@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class HangMan {
     public static void main(String[] args) {
         String word = RandomWord();
@@ -5,7 +7,9 @@ public class HangMan {
     }
 
     private static String RandomWord() {
-        String word = "hello";
+        Random randNum = new Random();
+        String[] wordList = {"hello","word","sample"};
+        String word = wordList[randNum.nextInt(wordList.length)];
         return word;
     }
 }
