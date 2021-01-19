@@ -6,8 +6,17 @@ import java.util.Scanner;
 
 public class HangMan {
     public static void main(String[] args) {
-        String word = RandomWord();
-        System.out.println(word);
+        while (true) {
+            String word = RandomWord();
+            System.out.println(word);
+            String in = ReadInput();
+            System.out.println(in);
+        }
+    }
+
+    private static String ReadInput() {
+        Scanner in = new Scanner(System.in);
+        return in.nextLine();
     }
 
     private static String RandomWord() {
@@ -24,7 +33,6 @@ public class HangMan {
             wordList.add(input.nextLine());
         }
         Random randNum = new Random();
-        String word = wordList.get(randNum.nextInt(wordList.size()));
-        return word;
+        return wordList.get(randNum.nextInt(wordList.size()));
     }
 }
