@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 public class HangMan {
     public static void main(String[] args) {
-        boolean win = false;
-        while (!win) {
-            String word = RandomWord();
+        boolean gameEnd = false;
+        String word = RandomWord();
+        while (!gameEnd) {
             System.out.println(word);
             String in = ReadInput();
             System.out.println(in);
@@ -18,16 +18,21 @@ public class HangMan {
             } else {
                 if (in.equals(word)) {
                     System.out.println("you guessed the word!");
-                    win = true;
-                } else {
-                    WrongAnswer();
+                    gameEnd = true;
+                } else if (WrongAnswer(isLetter, in)) {
+                    gameEnd = true;
                 }
             }
         }
     }
 
-    private static void WrongAnswer() {
-
+    private static boolean WrongAnswer(boolean isLetter, String in) {
+        if (isLetter) {
+            return false;
+        } else {
+            System.out.println("Wrong guess, you lose.");
+            return true;
+        }
     }
 
     private static boolean CheckIfLetter(String in) {
