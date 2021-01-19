@@ -6,14 +6,28 @@ import java.util.Scanner;
 
 public class HangMan {
     public static void main(String[] args) {
-        while (true) {
+        boolean win = false;
+        while (!win) {
             String word = RandomWord();
             System.out.println(word);
             String in = ReadInput();
             System.out.println(in);
             boolean isLetter = CheckIfLetter(in);
-            System.out.println(isLetter);
+            if (isLetter) {
+                System.out.println("it's a letter");
+            } else {
+                if (in.equals(word)) {
+                    System.out.println("you guessed the word!");
+                    win = true;
+                } else {
+                    WrongAnswer();
+                }
+            }
         }
+    }
+
+    private static void WrongAnswer() {
+
     }
 
     private static boolean CheckIfLetter(String in) {
@@ -26,7 +40,7 @@ public class HangMan {
 
     private static String ReadInput() {
         Scanner in = new Scanner(System.in);
-        return in.nextLine();
+        return in.nextLine().toLowerCase();
     }
 
     private static String RandomWord() {
