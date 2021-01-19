@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -19,12 +18,13 @@ public class HangMan {
             e.printStackTrace();
         }
         ArrayList<String> wordList = new ArrayList<>();
-        while (input.hasNext()) {
+        while (true) {
+            assert input != null;
+            if (!input.hasNext()) break;
             wordList.add(input.nextLine());
-            input.nextLine();
         }
         Random randNum = new Random();
-        String word = wordList[randNum.nextInt(wordList.length)];
+        String word = wordList.get(randNum.nextInt(wordList.size()));
         return word;
     }
 }
