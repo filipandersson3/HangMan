@@ -11,7 +11,17 @@ public class HangMan {
             System.out.println(word);
             String in = ReadInput();
             System.out.println(in);
+            boolean isLetter = CheckIfLetter(in);
+            System.out.println(isLetter);
         }
+    }
+
+    private static boolean CheckIfLetter(String in) {
+        boolean isLetter = true;
+        if (in.length() > 1) {
+            isLetter = false;
+        }
+        return isLetter;
     }
 
     private static String ReadInput() {
