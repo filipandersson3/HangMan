@@ -19,21 +19,14 @@ public class HangMan {
                 if (in.equals(word)) {
                     System.out.println("you guessed the word!");
                     gameEnd = true;
-                } else if (WrongAnswer(isLetter, in)) {
+                } else {
+                    System.out.println("wrong guess, you lose.");
                     gameEnd = true;
                 }
             }
         }
     }
 
-    private static boolean WrongAnswer(boolean isLetter, String in) {
-        if (isLetter) {
-            return false;
-        } else {
-            System.out.println("Wrong guess, you lose.");
-            return true;
-        }
-    }
 
     private static boolean CheckIfLetter(String in) {
         boolean isLetter = true;
