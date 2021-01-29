@@ -8,23 +8,34 @@ public class HangMan {
     public static void main(String[] args) {
         boolean gameEnd = false;
         String word = RandomWord();
-        char[] correctCharList = new char[word.length()];
-        for (int o = 0; o < word.length(); o++) {
-            correctCharList[o] = '_';
-        }
+        char[] feedback = getFeedback(word);
         while (!gameEnd) {
             System.out.println(word);
-            System.out.println(correctCharList);
+            System.out.println(feedback);
             String in = ReadInput();
-            System.out.println(in);
-            boolean isLetter = CheckIfLetter(in);
-            if (isLetter) {
+            if (CheckIfLetter(in)) {
                 System.out.println("it's a letter");
-                CheckLetterGuess(word, in);
+                if (word.contains(in)) {
+                    System.out.println("Right letter");
+                    ArrayList<Integer> letterPlaces = getLetterPlaces(word, in);
+                    for (int k = 0; k < letterPlaces.size(); k++) {
+                        feedback[letterPlaces.get(k)] = in.charAt(0);
+                    }
+                } else {
+                    System.out.println("Wrong letter");
+                }
             } else {
                 gameEnd = CheckWordGuess(word, in);
             }
         }
+    }
+
+    private static char[] getFeedback(String word) {
+        char[] feedback = new char[word.length()];
+        for (int o = 0; o < word.length(); o++) {
+            feedback[o] = '_';
+        }
+        return feedback;
     }
 
     private static boolean CheckWordGuess(String word, String in) {
@@ -39,17 +50,16 @@ public class HangMan {
         return gameEnd;
     }
 
-    private static void CheckLetterGuess(String word, String in) {
-        if (word.contains(in)) {
+    private static ArrayList<Integer> getLetterPlaces(String word, String in) {
+            ArrayList<Integer> places = new ArrayList<>();
+            int j = 0;
             System.out.println("at");
             for (int i = 0; i < word.length(); i++) {
                 if (word.charAt(i) == in.charAt(0)) {
-                    System.out.println("place " + i);
+                    places.add(i);
                 }
             }
-        } else {
-            System.out.println("wrong letter");
-        }
+            return places;
     }
 
 
