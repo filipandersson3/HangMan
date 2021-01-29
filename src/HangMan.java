@@ -15,18 +15,22 @@ public class HangMan {
             String in = ReadInput();
             if (CheckIfLetter(in)) {
                 System.out.println("it's a letter");
-                if (word.contains(in)) {
-                    System.out.println("Right letter");
-                    ArrayList<Integer> letterPlaces = getLetterPlaces(word, in);
-                    for (int k = 0; k < letterPlaces.size(); k++) {
-                        feedback[letterPlaces.get(k)] = in.charAt(0);
-                    }
-                } else {
-                    System.out.println("Wrong letter");
-                }
+                CheckLetterGuess(word, feedback, in);
             } else {
                 gameEnd = CheckWordGuess(word, in);
             }
+        }
+    }
+
+    private static void CheckLetterGuess(String word, char[] feedback, String in) {
+        if (word.contains(in)) {
+            System.out.println("Right letter");
+            ArrayList<Integer> letterPlaces = getLetterPlaces(word, in);
+            for (int k = 0; k < letterPlaces.size(); k++) {
+                feedback[letterPlaces.get(k)] = in.charAt(0);
+            }
+        } else {
+            System.out.println("Wrong letter");
         }
     }
 
