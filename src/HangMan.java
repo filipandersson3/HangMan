@@ -10,16 +10,30 @@ public class HangMan {
         String word = RandomWord();
         char[] feedback = getFeedback(word);
         while (!gameEnd) {
-            System.out.println(word);
-            System.out.println(feedback);
-            String in = ReadInput();
-            if (CheckIfLetter(in)) {
-                System.out.println("it's a letter");
-                CheckLetterGuess(word, feedback, in);
+            String feedbackString = FeedbackToString(feedback);
+            if (feedbackString.equals(word)) {
+                System.out.println("you guessed all letters and won!");
+                gameEnd = true;
             } else {
-                gameEnd = CheckWordGuess(word, in);
+                System.out.println(word);
+                System.out.println(feedbackString);
+                String in = ReadInput();
+                if (CheckIfLetter(in)) {
+                    System.out.println("it's a letter");
+                    CheckLetterGuess(word, feedback, in);
+                } else {
+                    gameEnd = CheckWordGuess(word, in);
+                }
             }
         }
+    }
+
+    private static String FeedbackToString(char[] feedback) {
+        String feedbackString = "";
+        for (char c : feedback) {
+            feedbackString += c;
+        }
+        return feedbackString;
     }
 
     private static void CheckLetterGuess(String word, char[] feedback, String in) {
