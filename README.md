@@ -16,3 +16,13 @@ har också gjort om några saker till funktioner.
 sen ska jag fixa så att programmet byter ut _ med rätt 
 gissad bokstav och börja räkna poäng och såna saker för att få reda på om man vinner eller ej.
 det har jag ganska bra koll på hur jag ska göra.
+# 2021-01-29
+har gjort att feedback ändras om man skriver rätt bokstav och att om alla bokstäver 
+är rätt så vinner man. också ändrat lite med funktionerna för att det ska vara lättare 
+att förstå
+
+nästa lektion ska jag lägga till så att man har 10 poäng som tickar ned för varje gissning, 
+och något som visar hur många försök man gjort. man förlorar om poängen tar slut. men jag 
+känner som att jag har gjort det svåraste nu och att jag vet hur jag ska göra resten.
+
+när jag är färdig måste jag också kolla igenom koden så att den ser bra ut.
