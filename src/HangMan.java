@@ -1,17 +1,91 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
 public class HangMan {
     public static void main(String[] args) {
         boolean gameEnd = false;
+        String[][] hangingDrawings = {
+               {"         ",
+                "         ",
+                "         ",
+                "         ",
+                "         ",
+                "         ",
+                "========="},
+               {"         ",
+                "      |  ",
+                "      |  ",
+                "      |  ",
+                "      |  ",
+                "      |  ",
+                "========="},
+                {"  +---+  ",
+                 "      |  ",
+                 "      |  ",
+                 "      |  ",
+                 "      |  ",
+                 "      |  ",
+                 "========="},
+                {"  +---+  ",
+                 "  |   |  ",
+                 "      |  ",
+                 "      |  ",
+                 "      |  ",
+                 "      |  ",
+                 "========="},
+                {"  +---+  ",
+                 "  |   |  ",
+                 "  O   |  ",
+                 "      |  ",
+                 "      |  ",
+                 "      |  ",
+                 "========="},
+                {"  +---+  ",
+                 "  |   |  ",
+                 "  O   |  ",
+                 "  |   |  ",
+                 "      |  ",
+                 "      |  ",
+                 "========="},
+                {"  +---+  ",
+                 "  |   |  ",
+                 "  O   |  ",
+                 " /|   |  ",
+                 "      |  ",
+                 "      |  ",
+                 "========="},
+                {"  +---+  ",
+                 "  |   |  ",
+                 "  O   |  ",
+                 " /|\\  |  ",
+                 "      |  ",
+                 "      |  ",
+                 "========="},
+                {"  +---+  ",
+                 "  |   |  ",
+                 "  O   |  ",
+                 " /|\\  |  ",
+                 " /    |  ",
+                 "      |  ",
+                 "========="},
+                {"  +---+  ",
+                 "  |   |  ",
+                 "  O   |  ",
+                 " /|\\  |  ",
+                 " / \\  |  ",
+                 "      |  ",
+                 "========="},
+        };
         String word = RandomWord();
         ArrayList<Character> wrongCharList = new ArrayList<>();
         char[] feedback = getFeedback(word);
-        int points = 10;
+        int points = 9;
         while (!gameEnd) {
+            DrawHanging(hangingDrawings[9-points]);
             String feedbackString = FeedbackToString(feedback);
             if (feedbackString.equals(word)) {
                 System.out.println("you guessed all letters and won!");
@@ -32,6 +106,12 @@ public class HangMan {
                     gameEnd = CheckWordGuess(word, in);
                 }
             }
+        }
+    }
+
+    private static void DrawHanging(String[] hangingDrawing) {
+        for (int m = 0; m < hangingDrawing.length; m++) {
+            System.out.println(hangingDrawing[m]);
         }
     }
 
