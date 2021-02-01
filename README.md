@@ -26,3 +26,7 @@ och något som visar hur många försök man gjort. man förlorar om poängen ta
 känner som att jag har gjort det svåraste nu och att jag vet hur jag ska göra resten.
 
 när jag är färdig måste jag också kolla igenom koden så att den ser bra ut.
+# 2021-02-01
+har gjort en lista av alla felaktiga gissningar, poäng system och lagt in ASCII art som jag hittade på internet.
+
+gjorde i princip färdigt det sista nu så att jag kan fixa till så att koden ser bra ut och debugga nästa lektion.
