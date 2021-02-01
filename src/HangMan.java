@@ -8,19 +8,26 @@ public class HangMan {
     public static void main(String[] args) {
         boolean gameEnd = false;
         String word = RandomWord();
+        ArrayList<Character> wrongCharList = new ArrayList<>();
         char[] feedback = getFeedback(word);
+        int points = 10;
         while (!gameEnd) {
             String feedbackString = FeedbackToString(feedback);
             if (feedbackString.equals(word)) {
                 System.out.println("you guessed all letters and won!");
                 gameEnd = true;
+            } else if (points == 0) {
+                System.out.println("you ran out of guesses");
+                gameEnd = true;
             } else {
                 System.out.println(word);
                 System.out.println(feedbackString);
+                System.out.println("you have " + points + " guesses left");
+                System.out.println("you have guessed: " + wrongCharList.toString());
                 String in = ReadInput();
                 if (CheckIfLetter(in)) {
                     System.out.println("it's a letter");
-                    CheckLetterGuess(word, feedback, in);
+                    points = CheckLetterGuess(word, feedback, in, wrongCharList, points);
                 } else {
                     gameEnd = CheckWordGuess(word, in);
                 }
@@ -36,16 +43,24 @@ public class HangMan {
         return feedbackString;
     }
 
-    private static void CheckLetterGuess(String word, char[] feedback, String in) {
+    private static int CheckLetterGuess(String word, char[] feedback, String in, ArrayList<Character> wrongCharList, int points) {
         if (word.contains(in)) {
             System.out.println("Right letter");
             ArrayList<Integer> letterPlaces = getLetterPlaces(word, in);
             for (int k = 0; k < letterPlaces.size(); k++) {
                 feedback[letterPlaces.get(k)] = in.charAt(0);
+                return --points;
             }
         } else {
             System.out.println("Wrong letter");
+            if (!wrongCharList.contains(in.charAt(0))) {
+                wrongCharList.add(in.charAt(0));
+                return --points;
+            } else {
+                System.out.println("you have already guessed that");
+            }
         }
+        return points;
     }
 
     private static char[] getFeedback(String word) {
