@@ -49,8 +49,8 @@ public class HangMan {
             ArrayList<Integer> letterPlaces = getLetterPlaces(word, in);
             for (int k = 0; k < letterPlaces.size(); k++) {
                 feedback[letterPlaces.get(k)] = in.charAt(0);
-                return --points;
             }
+            return --points;
         } else {
             System.out.println("Wrong letter");
             if (!wrongCharList.contains(in.charAt(0))) {
