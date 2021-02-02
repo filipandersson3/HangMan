@@ -30,3 +30,7 @@ när jag är färdig måste jag också kolla igenom koden så att den ser bra ut
 har gjort en lista av alla felaktiga gissningar, poäng system och lagt in ASCII art som jag hittade på internet.
 
 gjorde i princip färdigt det sista nu så att jag kan fixa till så att koden ser bra ut och debugga nästa lektion.
+# 2021-02-02
+fixat varningar, lagt till ord i wordlist filen och gjort en class HangManDrawings för att få bort datan från koden. också försökt att göra så att man inte kan lämna svaret tomt men det funkar inte.
+
+färdig med koden nu. ska göra postmortem nästa lektion.
