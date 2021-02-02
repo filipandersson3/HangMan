@@ -1,85 +1,13 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
 public class HangMan {
     public static void main(String[] args) {
         boolean gameEnd = false;
-        String[][] hangingDrawings = {
-               {"         ",
-                "         ",
-                "         ",
-                "         ",
-                "         ",
-                "         ",
-                "========="},
-               {"         ",
-                "      |  ",
-                "      |  ",
-                "      |  ",
-                "      |  ",
-                "      |  ",
-                "========="},
-                {"  +---+  ",
-                 "      |  ",
-                 "      |  ",
-                 "      |  ",
-                 "      |  ",
-                 "      |  ",
-                 "========="},
-                {"  +---+  ",
-                 "  |   |  ",
-                 "      |  ",
-                 "      |  ",
-                 "      |  ",
-                 "      |  ",
-                 "========="},
-                {"  +---+  ",
-                 "  |   |  ",
-                 "  O   |  ",
-                 "      |  ",
-                 "      |  ",
-                 "      |  ",
-                 "========="},
-                {"  +---+  ",
-                 "  |   |  ",
-                 "  O   |  ",
-                 "  |   |  ",
-                 "      |  ",
-                 "      |  ",
-                 "========="},
-                {"  +---+  ",
-                 "  |   |  ",
-                 "  O   |  ",
-                 " /|   |  ",
-                 "      |  ",
-                 "      |  ",
-                 "========="},
-                {"  +---+  ",
-                 "  |   |  ",
-                 "  O   |  ",
-                 " /|\\  |  ",
-                 "      |  ",
-                 "      |  ",
-                 "========="},
-                {"  +---+  ",
-                 "  |   |  ",
-                 "  O   |  ",
-                 " /|\\  |  ",
-                 " /    |  ",
-                 "      |  ",
-                 "========="},
-                {"  +---+  ",
-                 "  |   |  ",
-                 "  O   |  ",
-                 " /|\\  |  ",
-                 " / \\  |  ",
-                 "      |  ",
-                 "========="},
-        };
+        String[][] hangingDrawings = HangManDrawings.hangingDrawings;
         String word = RandomWord();
         ArrayList<Character> wrongCharList = new ArrayList<>();
         char[] feedback = getFeedback(word);
@@ -92,15 +20,17 @@ public class HangMan {
                 gameEnd = true;
             } else if (points == 0) {
                 System.out.println("you ran out of guesses");
+                System.out.println("the word was "+word);
                 gameEnd = true;
             } else {
-                System.out.println(word);
                 System.out.println(feedbackString);
                 System.out.println("you have " + points + " guesses left");
                 System.out.println("you have guessed: " + wrongCharList.toString());
                 String in = ReadInput();
-                if (CheckIfLetter(in)) {
-                    System.out.println("it's a letter");
+                if (word.equals("")) {
+                    System.out.println("DON'T LEAVE THE GUESS BLANK IDOT YOU DON'T GET TO PLAY ANYMORE");
+                    System.exit(0);
+                } else if (CheckIfLetter(in)) {
                     points = CheckLetterGuess(word, feedback, in, wrongCharList, points);
                 } else {
                     gameEnd = CheckWordGuess(word, in);
@@ -109,26 +39,35 @@ public class HangMan {
         }
     }
 
+    /**
+     * takes list of drawings and prints list of strings to console
+     * @param hangingDrawing list of drawings
+     */
     private static void DrawHanging(String[] hangingDrawing) {
-        for (int m = 0; m < hangingDrawing.length; m++) {
-            System.out.println(hangingDrawing[m]);
+        for (String s : hangingDrawing) {
+            System.out.println(s);
         }
     }
 
+    /**
+     * turns feedback char array into string
+     * @param feedback list of correct letter guesses and blank spaces
+     * @return feedback as string
+     */
     private static String FeedbackToString(char[] feedback) {
-        String feedbackString = "";
+        StringBuilder feedbackString = new StringBuilder();
         for (char c : feedback) {
-            feedbackString += c;
+            feedbackString.append(c);
         }
-        return feedbackString;
+        return feedbackString.toString();
     }
 
     private static int CheckLetterGuess(String word, char[] feedback, String in, ArrayList<Character> wrongCharList, int points) {
         if (word.contains(in)) {
             System.out.println("Right letter");
             ArrayList<Integer> letterPlaces = getLetterPlaces(word, in);
-            for (int k = 0; k < letterPlaces.size(); k++) {
-                feedback[letterPlaces.get(k)] = in.charAt(0);
+            for (Integer letterPlace : letterPlaces) {
+                feedback[letterPlace] = in.charAt(0);
             }
             return --points;
         } else {
@@ -152,21 +91,17 @@ public class HangMan {
     }
 
     private static boolean CheckWordGuess(String word, String in) {
-        boolean gameEnd;
         if (in.equals(word)) {
             System.out.println("you guessed the word!");
-            gameEnd = true;
         } else {
             System.out.println("wrong guess, you lose.");
-            gameEnd = true;
+            System.out.println("the word was "+word);
         }
-        return gameEnd;
+        return true;
     }
 
     private static ArrayList<Integer> getLetterPlaces(String word, String in) {
             ArrayList<Integer> places = new ArrayList<>();
-            int j = 0;
-            System.out.println("at");
             for (int i = 0; i < word.length(); i++) {
                 if (word.charAt(i) == in.charAt(0)) {
                     places.add(i);
@@ -203,6 +138,6 @@ public class HangMan {
             wordList.add(input.nextLine());
         }
         Random randNum = new Random();
-        return wordList.get(randNum.nextInt(wordList.size()));
+        return wordList.get(randNum.nextInt(wordList.size())).toLowerCase();
     }
 }
