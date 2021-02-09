@@ -2,7 +2,7 @@
 
 Filip Andersson 2021-02-05
 
-## Inlednig och bakgrund
+## Inleding och bakgrund
 
 Jag har gjort hänga gubbe spelet i java. Först delade jag upp det i flera steg med diagrams.net:
 https://app.diagrams.net/#G1_HGgIU7KAxLBk8n7EbyglWkhqyYwcGXt 
